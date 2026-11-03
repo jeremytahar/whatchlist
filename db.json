@@ -1,0 +1,32 @@
+{
+  "watchlist": [
+    {
+      "id": "1",
+      "imdbId": "tt0241527",
+      "title": "Harry Potter and the Sorcerer's Stone",
+      "type": "movie",
+      "year": "2001",
+      "status": "planned",
+      "rating": 8.1,
+      "addedAt": "2026-11-03T12:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "imdbId": "tt0903747",
+      "title": "Breaking Bad",
+      "type": "series",
+      "year": "2008",
+      "status": "in_progress",
+      "rating": 9.5,
+      "addedAt": "2026-11-03T9:30:00.000Z"
+    },
+    {
+      "id": "3",
+      "title": "League of Legends",
+      "type": "game",
+      "status": "in_progress",
+      "rating": 10,
+      "addedAt": "2022-11-01T09:00:00.000Z"
+    }
+  ]
+}
