@@ -3,13 +3,13 @@ export type MediaType = 'movie' | 'series' | 'anime' | 'game';
 
 export interface WatchlistItem {
     id: string,
-    title: string,
+    Title: string,
     type: MediaType,
     status: Status,
-    rating: number,
+    imdbRating: string,
     addedAt: string,
     imdbId?: string,
-    year?: string,
-    poster?: string,
-    plot?: string
+    Year?: string,
+    Poster?: string,
+    Plot?: string
 }
