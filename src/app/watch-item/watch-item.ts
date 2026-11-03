@@ -1,7 +1,7 @@
 export type Status = 'planned' | 'in_progress' | 'done';
 export type MediaType = 'movie' | 'series' | 'anime' | 'game';
 
-export interface watchItem {
+export interface WatchlistItem {
     id: string,
     title: string,
     type: MediaType,
