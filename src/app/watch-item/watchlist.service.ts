@@ -1,6 +1,7 @@
 import { Service, signal, inject } from '@angular/core';
 import { WatchlistItem } from './watch-item';
 import { HttpClient } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
 
 @Service()
 export class WatchlistService {
@@ -33,5 +34,15 @@ export class WatchlistService {
         this.loadingSignal.set(false);
       },
     });
+  }
+
+  addItem(newItem: Omit<WatchlistItem, 'id'>): Observable<WatchlistItem> {
+    const watchlistItem = { ...newItem, addedAt: new Date().toISOString() };
+
+    return this.http.post<WatchlistItem>(this.apiUrl, watchlistItem).pipe(
+        tap((created) => {
+          this.watchlistSignal.update((watchlist) => [...watchlist, created]);
+        }),
+      );
   }
 }
