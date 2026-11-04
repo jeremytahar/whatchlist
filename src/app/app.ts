@@ -1,9 +1,10 @@
 import { Component, signal, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { WatchlistService } from './watch-item/watchlist.service';
+import { OmdbSearch } from './watchlist/omdb-search/omdb-search';
 
 @Component({
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, OmdbSearch],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',

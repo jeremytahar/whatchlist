@@ -1,0 +1,16 @@
+<input id="searchControl" type="text" [formControl]="searchControl" autocomplete="off"
+    placeholder="Harry Potter, Inception, Breaking Bad..." />
+
+@for (result of results(); track result.imdbID) {
+<div>
+    <h3>{{ result.Title }}</h3>
+    <p>{{ result.Year }}</p>
+    <p>{{ result.Type }}</p>
+    @if (result.Poster !== 'N/A') {
+    <img [src]="result.Poster" [alt]="result.Title" width="250" />
+    }
+</div>
+}
+@empty {
+<p>Aucun résultat trouvé</p>
+}
