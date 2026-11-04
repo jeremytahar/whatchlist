@@ -9,8 +9,8 @@
     @if (result.Poster !== 'N/A') {
     <img [src]="result.Poster" [alt]="result.Title" width="250" />
     }
+    <button (click)="addMovieToWatchlist(result)">Ajouter</button>
 </div>
 }
 @empty {
-<p>Aucun résultat trouvé</p>
 }

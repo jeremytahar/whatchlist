@@ -1,0 +1,6 @@
+<h3>{{ item().Title }}</h3>
+<p>{{ item().Year }}</p>
+<p>{{ item().type }}</p>
+@if (item().Poster !== 'N/A') {
+<img [src]="item().Poster" [alt]="item().Title" width="250" />
+}

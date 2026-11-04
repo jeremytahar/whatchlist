@@ -1,0 +1,6 @@
+@for (item of watchlist(); track item.id) {
+<app-watch-card [item]="item" />
+}
+@empty {
+<p>Aucun résultat trouvé</p>
+}

@@ -17,6 +17,7 @@ export interface MovieDetails {
   Title: string;
   Year: string;
   imdbID: string;
+  imdbRating: string,
   Type: string;
   Poster: string;
   Plot: string;
