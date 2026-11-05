@@ -9,7 +9,7 @@
 }
 
 @for (item of filteredWatchlist(); track item.id) {
-<app-watch-card [item]="item" />
+<app-watch-card [item]="item" (statusChange)="onStatusChange(item.id, $event)" (remove)="onRemove(item.id)" />
 }
 @empty {
 <p>{{ activeTab() === 'all' ? 'Ta watchlist est vide' : 'Aucun élément dans cette catégorie' }}</p>

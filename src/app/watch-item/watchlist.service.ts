@@ -1,5 +1,5 @@
 import { Service, signal, inject } from '@angular/core';
-import { WatchlistItem } from './watch-item';
+import { WatchlistItem, Status } from './watch-item';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 
@@ -45,4 +45,22 @@ export class WatchlistService {
         }),
       );
   }
+
+  updateStatus(id: string, status: Status): Observable<WatchlistItem> {
+    return this.http.patch<WatchlistItem>(`${this.apiUrl}/${id}`, { status }).pipe(
+      tap((updated) => {
+        this.watchlistSignal.update((items) => items.map((item) => (item.id === id ? updated : item)));
+      }),
+    );
+  }
+
+  deleteItem(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(
+        tap(() => {
+            this.watchlistSignal.update((items) => items.filter((item) => (item.id !== id)));
+          }),
+    );
+  }
+
+
 }

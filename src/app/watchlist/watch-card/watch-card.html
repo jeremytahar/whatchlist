@@ -4,4 +4,8 @@
 @if (item().Poster !== 'N/A') {
 <img [src]="item().Poster" [alt]="item().Title" width="250" />
 }
+@for (s of statuses; track s) {
+<button (click)="statusChange.emit(s)" [class.active]="item().status === s">{{ s }}</button>
+}
+<button (click)="remove.emit()">Supprimer</button>
 <a [routerLink]="['/watchlist', item().id]">Voir le détail</a>

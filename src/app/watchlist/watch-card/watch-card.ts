@@ -1,5 +1,5 @@
-import { Component, input } from '@angular/core';
-import { WatchlistItem } from '../../watch-item/watch-item';
+import { Component, input, output } from '@angular/core';
+import { WatchlistItem, Status } from '../../watch-item/watch-item';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -10,4 +10,8 @@ import { RouterLink } from '@angular/router';
 })
 export class WatchCard {
   item = input.required<WatchlistItem>();
+  statusChange = output<Status>();
+  remove = output<void>();
+
+  protected readonly statuses: Status[] = ['planned', 'in_progress', 'done'];
 }
