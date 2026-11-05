@@ -2,9 +2,10 @@ import { Component, inject, signal, computed } from '@angular/core';
 import { WatchlistService } from '../../watch-item/watchlist.service';
 import { WatchCard } from '../watch-card/watch-card';
 import { Status, WatchlistItem } from '../../watch-item/watch-item';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [WatchCard],
+  imports: [WatchCard, RouterLink],
   selector: 'app-watch-list',
   styleUrl: './watch-list.css',
   templateUrl: './watch-list.html',

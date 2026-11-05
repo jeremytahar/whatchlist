@@ -6,7 +6,7 @@ export interface WatchlistItem {
     Title: string,
     type: MediaType,
     status: Status,
-    imdbRating: string,
+    imdbRating?: string,
     addedAt: string,
     imdbId?: string,
     Year?: string,

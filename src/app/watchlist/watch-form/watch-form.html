@@ -1,0 +1,51 @@
+@let title = watchlistForm.controls.Title;
+@let year = watchlistForm.controls.Year;
+
+<form [formGroup]="watchlistForm" (ngSubmit)="onSubmit()">
+    <label for="title">Title</label>
+    <input id="title" type="text" formControlName="Title" autocomplete="off" />
+    @if (title.touched && title.errors?.['required']) {
+    <p class="error">Title is required.</p>
+    }
+    @if (title.touched && title.errors?.['minlength']) {
+    <p class="error">Title must be at least 2 characters long.</p>
+    }
+
+    <br>
+
+    <label for="year">Year</label>
+    <input id="year" type="text" formControlName="Year" autocomplete="off" />
+    @if (year.touched && year.errors?.['pattern']) {
+    <p class="error">Year must be in YYYY format.</p>
+    }
+
+    <br>
+
+    <label for="plot">Plot</label>
+    <textarea id="plot" formControlName="Plot" autocomplete="off"></textarea>
+
+    <br>
+
+    <label for="type">Type</label>
+    <select id="type" formControlName="type" autocomplete="off">
+        @for (option of types(); track option) {
+        <option [value]="option">{{ option }}</option>
+        }
+    </select>
+
+    <br>
+
+    <label for="status">Status</label>
+    <select id="status" formControlName="status" autocomplete="off">
+        @for (option of statuses(); track option) {
+        <option [value]="option">{{ option }}</option>
+        }
+    </select>
+
+    <br>
+
+    <button type="submit" [disabled]="watchlistForm.invalid || saving()">Send</button>
+    @if (submitError()) {
+    <p class="error">{{ submitError() }}</p>
+    }
+</form>

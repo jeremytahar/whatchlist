@@ -1,9 +1,11 @@
 import { Routes } from '@angular/router';
 import { WatchDetail } from './watchlist/watch-detail/watch-detail';
 import { WatchList } from './watchlist/watch-list/watch-list';
+import { WatchForm } from './watchlist/watch-form/watch-form';
 
 export const routes: Routes = [
   { path: '', component: WatchList },
   { path: 'watchlist', component: WatchList },
+  { path: 'watchlist/new', component: WatchForm },
   { path: 'watchlist/:id', component: WatchDetail },
 ];
