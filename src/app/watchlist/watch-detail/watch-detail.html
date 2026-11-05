@@ -1,0 +1,23 @@
+<section class="page detail-page">
+    @if (loading()) {
+    <p>Loading…</p>
+    } @else if (item(); as item) {
+    <article class="detail-card">
+        <p>Movie details</p>
+        <h2>{{ item.Title }}</h2>
+        <p>{{ item.Year }}</p>
+
+        <p>{{ item.type }}</p>
+        <p>{{ item.Plot }}</p>
+        <p>{{ item.status }}</p>
+        <p>{{ item.imdbRating }}</p>
+
+        <a routerLink="/">Retour à la liste</a>
+    </article>
+    } @else {
+    <div class="empty-state">
+        <p class="empty-title">Movie not found</p>
+        <a class="btn" routerLink="/">Back to list</a>
+    </div>
+    }
+</section>

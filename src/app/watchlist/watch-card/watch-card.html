@@ -4,3 +4,4 @@
 @if (item().Poster !== 'N/A') {
 <img [src]="item().Poster" [alt]="item().Title" width="250" />
 }
+<a [routerLink]="['/watchlist', item().id]">Voir le détail</a>
