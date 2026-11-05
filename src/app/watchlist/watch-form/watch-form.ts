@@ -54,6 +54,18 @@ export class WatchForm {
       type: item.type,
       Plot: item.Plot ?? '',
     });
+
+    const fromOMDB = item.imdbId;
+
+    if (fromOMDB) {
+      this.watchlistForm.controls.Title.disable();
+      this.watchlistForm.controls.Year.disable();
+      this.watchlistForm.controls.Plot.disable();
+    } else {
+      this.watchlistForm.controls.Title.enable();
+      this.watchlistForm.controls.Year.enable();
+      this.watchlistForm.controls.Plot.enable();
+    }
   });
 
   protected onSubmit(): void {
