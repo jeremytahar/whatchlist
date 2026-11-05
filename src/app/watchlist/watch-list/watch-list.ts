@@ -33,6 +33,10 @@ export class WatchList {
     );
   });
 
+  onReload(): void {
+    this.watchlistService.loadItems();
+  }
+
 
 
 }
