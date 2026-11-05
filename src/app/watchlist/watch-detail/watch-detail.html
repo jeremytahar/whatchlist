@@ -7,6 +7,11 @@
         <h2>{{ item.Title }}</h2>
         <p>{{ item.Year }}</p>
 
+        @if (item.Poster !== 'N/A') {
+        <img [src]="item.Poster" [alt]="item.Title" width="250" />
+        }
+
+
         <p>{{ item.type }}</p>
         <p>{{ item.Plot }}</p>
         <p>{{ item.status }}</p>

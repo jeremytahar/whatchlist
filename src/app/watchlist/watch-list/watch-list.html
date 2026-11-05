@@ -1,4 +1,8 @@
-@for (item of watchlist(); track item.id) {
+@for (tab of tabs; track tab.value) {
+    <button (click)="activeTab.set(tab.value)" [class.active]="activeTab() === tab.value">{{ tab.label }}</button>
+}
+
+@for (item of filteredWatchlist(); track item.id) {
 <app-watch-card [item]="item" />
 }
 @empty {
