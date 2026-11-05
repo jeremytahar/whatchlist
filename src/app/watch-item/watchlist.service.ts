@@ -47,11 +47,7 @@ export class WatchlistService {
   }
 
   updateStatus(id: string, status: Status): Observable<WatchlistItem> {
-    return this.http.patch<WatchlistItem>(`${this.apiUrl}/${id}`, { status }).pipe(
-      tap((updated) => {
-        this.watchlistSignal.update((items) => items.map((item) => (item.id === id ? updated : item)));
-      }),
-    );
+    return this.updateItem(id, { status })
   }
 
   deleteItem(id: string): Observable<void> {
@@ -62,5 +58,11 @@ export class WatchlistService {
     );
   }
 
-
+  updateItem(id: string, changes: Partial<Omit<WatchlistItem, 'id'>>): Observable<WatchlistItem> {
+    return this.http.patch<WatchlistItem>(`${this.apiUrl}/${id}`, changes).pipe(
+      tap((updated) => {
+        this.watchlistSignal.update((items) => items.map((item) => (item.id === id ? updated : item)));
+      }),
+    );
+  }
 }

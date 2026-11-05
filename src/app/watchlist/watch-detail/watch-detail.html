@@ -20,6 +20,7 @@
         }
 
         <a routerLink="/">Retour à la liste</a>
+        <a [routerLink]="['/watchlist', item.id, 'edit']">Modifier</a>
     </article>
     } @else {
     <div class="empty-state">

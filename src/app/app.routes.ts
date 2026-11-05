@@ -8,4 +8,5 @@ export const routes: Routes = [
   { path: 'watchlist', component: WatchList },
   { path: 'watchlist/new', component: WatchForm },
   { path: 'watchlist/:id', component: WatchDetail },
+  { path: 'watchlist/:id/edit', component: WatchForm}
 ];

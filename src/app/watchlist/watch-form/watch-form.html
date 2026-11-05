@@ -1,6 +1,12 @@
 @let title = watchlistForm.controls.Title;
 @let year = watchlistForm.controls.Year;
 
+@if (isEditMode()) {
+<h2>Edit Watchlist Item</h2>
+} @else {
+<h2>New Watchlist Item</h2>
+}
+
 <form [formGroup]="watchlistForm" (ngSubmit)="onSubmit()">
     <label for="title">Title</label>
     <input id="title" type="text" formControlName="Title" autocomplete="off" />
@@ -44,8 +50,16 @@
 
     <br>
 
-    <button type="submit" [disabled]="watchlistForm.invalid || saving()">Send</button>
+    <button type="submit" [disabled]="watchlistForm.invalid || saving()">
+        @if (isEditMode()) {
+        Update
+        } @else {
+        Create
+        }
+    </button>
     @if (submitError()) {
     <p class="error">{{ submitError() }}</p>
     }
 </form>
+
+<a routerLink="/watchlist">Retour à la liste</a>

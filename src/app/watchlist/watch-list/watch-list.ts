@@ -21,8 +21,8 @@ export class WatchList {
 
   protected readonly tabs: { value: Status | 'all'; label: string }[] = [
     { value: 'all', label: 'Tous' },
-    { value: 'in_progress', label: 'En cours' },
     { value: 'planned', label: 'Prévu' },
+    { value: 'in_progress', label: 'En cours' },
     { value: 'done', label: 'Terminé' },
   ];
 
