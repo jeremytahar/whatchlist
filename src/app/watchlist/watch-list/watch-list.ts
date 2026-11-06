@@ -3,10 +3,9 @@ import { WatchlistService } from '../../watch-item/watchlist.service';
 import { WatchCard } from '../watch-card/watch-card';
 import { Status, WatchlistItem } from '../../watch-item/watch-item';
 import { RouterLink } from '@angular/router';
-import { OmdbSearch } from '../omdb-search/omdb-search';
 
 @Component({
-  imports: [WatchCard, RouterLink, OmdbSearch],
+  imports: [WatchCard, RouterLink],
   selector: 'app-watch-list',
   styleUrl: './watch-list.css',
   templateUrl: './watch-list.html',
@@ -26,11 +25,28 @@ export class WatchList {
     { value: 'done', label: 'Terminé' },
   ];
 
+  protected readonly sortBy = signal<'date' | 'rating'>('date');
+
+  protected readonly sortOptions: { value: 'date' | 'rating'; label: string }[] = [
+    { value: 'date', label: 'Date' },
+    { value: 'rating', label: 'Note' },
+  ];
+
   protected readonly filteredWatchlist = computed(() => {
     if (this.activeTab() === 'all') {
       return this.watchlist();
     }
     return this.watchlist().filter((movie: WatchlistItem) => movie.status === this.activeTab());
+  });
+
+  protected readonly sortedWatchlist = computed(() => {
+    const list = [...this.filteredWatchlist()];
+
+    if (this.sortBy() === 'rating') {
+      return list.sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0) || b.addedAt.localeCompare(a.addedAt));
+    }
+
+    return list.sort((a,b) => b.addedAt.localeCompare(a.addedAt))
   });
 
   onReload(): void {

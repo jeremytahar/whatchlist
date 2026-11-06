@@ -8,7 +8,12 @@
 <button (click)="activeTab.set(tab.value)" [class.active]="activeTab() === tab.value">{{ tab.label }}</button>
 }
 
-@for (item of filteredWatchlist(); track item.id) {
+<span>Trier par </span>
+@for (option of sortOptions; track option.value) {
+    <button (click)="sortBy.set(option.value)" [class.active]="sortBy() === option.value">{{ option.label }}</button>
+}
+
+@for (item of sortedWatchlist(); track item.id) {
 <app-watch-card [item]="item" (statusChange)="onStatusChange(item.id, $event)" (remove)="onRemove(item.id)" (rate)="onRate(item.id, $event)" />
 }
 @empty {

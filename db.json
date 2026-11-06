@@ -11,7 +11,7 @@
       "type": "movie",
       "Poster": "https://m.media-amazon.com/images/M/MV5BOTA1Mzc2N2ItZWRiNS00MjQzLTlmZDQtMjU0NmY1YWRkMGQ4XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
       "id": "3gSHLLI",
-      "rating": 3
+      "rating": 1
     },
     {
       "Title": "Harry Potter and the Sorcerer's Stone",
@@ -23,7 +23,8 @@
       "addedAt": "2026-11-04T15:12:18.888Z",
       "type": "movie",
       "Poster": "https://m.media-amazon.com/images/M/MV5BNTU1MzgyMDMtMzBlZS00YzczLThmYWEtMjU3YmFlOWEyMjE1XkEyXkFqcGc@._V1_QL75_UY562_CR1,0,380,562_.jpg",
-      "id": "6HKvpKj"
+      "id": "6HKvpKj",
+      "rating": 5
     },
     {
       "Title": "Hunger Games",
@@ -32,7 +33,8 @@
       "Year": "2011",
       "Plot": "Test",
       "addedAt": "2026-11-05T17:23:11.639Z",
-      "id": "Zlz0Ilp"
+      "id": "Zlz0Ilp",
+      "rating": 4
     }
   ]
 }
