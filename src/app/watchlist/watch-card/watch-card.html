@@ -1,9 +1,10 @@
 <h3>{{ item().Title }}</h3>
 <p>{{ item().Year }}</p>
 <p>{{ item().type }}</p>
-@if (item().Poster !== 'N/A') {
+@if (item().Poster && item().Poster !== 'N/A') {
 <img [src]="item().Poster" [alt]="item().Title" width="250" />
 }
+<app-star-rating [rating]="item().rating ?? 0" (ratingChange)="rate.emit($event)" />
 @for (s of statuses; track s) {
 <button (click)="statusChange.emit(s)" [class.active]="item().status === s">{{ s }}</button>
 }

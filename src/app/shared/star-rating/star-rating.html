@@ -1,0 +1,5 @@
+@for (star of stars(); track star) {
+    <button type="button" (click)="rate(star)">
+        <div [class]="star <= rating() ? 'star-filled' : 'star-empty'" class="star"></div>
+    </button>
+}

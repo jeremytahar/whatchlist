@@ -1,9 +1,10 @@
 import { Component, input, inject, computed } from '@angular/core';
 import { WatchlistService } from '../../watch-item/watchlist.service';
 import { RouterLink } from '@angular/router';
+import { StarRating } from '../../shared/star-rating/star-rating';
 
 @Component({
-  imports: [RouterLink],
+  imports: [RouterLink, StarRating],
   selector: 'app-watch-detail',
   styleUrl: './watch-detail.css',
   templateUrl: './watch-detail.html',
@@ -16,4 +17,8 @@ export class WatchDetail {
   protected readonly item = computed(() =>
     this.watchlistService.watchlist().find((i) => i.id === String(this.id())),
   );
+
+  onRate(rating: number): void {
+    this.watchlistService.updateItem(this.id(), {rating}).subscribe();
+  }
 }

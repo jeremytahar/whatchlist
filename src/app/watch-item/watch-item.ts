@@ -11,5 +11,6 @@ export interface WatchlistItem {
     imdbId?: string,
     Year?: string,
     Poster?: string,
-    Plot?: string
+    Plot?: string,
+    rating?: number
 }

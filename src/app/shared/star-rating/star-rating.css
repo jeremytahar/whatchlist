@@ -1,0 +1,17 @@
+.star {
+    width: 30px;
+    aspect-ratio: 1;
+    clip-path: polygon(50% 0,
+            calc(50%*(1 + sin(.4turn))) calc(50%*(1 - cos(.4turn))),
+            calc(50%*(1 - sin(.2turn))) calc(50%*(1 - cos(.2turn))),
+            calc(50%*(1 + sin(.2turn))) calc(50%*(1 - cos(.2turn))),
+            calc(50%*(1 - sin(.4turn))) calc(50%*(1 - cos(.4turn))));
+}
+
+.star.star-filled {
+    background: #F8CA00;
+}
+
+.star.star-empty {
+    background: grey;
+}

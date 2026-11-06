@@ -10,6 +10,7 @@
         @if (item.Poster !== 'N/A') {
         <img [src]="item.Poster" [alt]="item.Title" width="250" />
         }
+        <app-star-rating [rating]="item.rating ?? 0" (ratingChange)="onRate($event)" />
 
 
         <p>{{ item.type }}</p>

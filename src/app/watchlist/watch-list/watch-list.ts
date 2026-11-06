@@ -44,4 +44,8 @@ export class WatchList {
   onRemove(id: string) {
     this.watchlistService.deleteItem(id).subscribe();
   }
+
+  onRate(id: string, rating: number) {
+    this.watchlistService.updateItem(id, { rating }).subscribe();
+  }
 }
