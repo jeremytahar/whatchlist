@@ -1,24 +1,57 @@
-@if (loading()) {
-<p>Chargement...</p>
-} @else if (error()) {
-<p>{{ error() }}</p>
-<button (click)="onReload()">Réessayer</button>
-} @else {
-@for (tab of tabs; track tab.value) {
-<button (click)="activeTab.set(tab.value)" [class.active]="activeTab() === tab.value">{{ tab.label }}</button>
-}
+<section class="page">
+  <div class="page-head">
+    <h2>Ma liste</h2>
+    <a routerLink="/watchlist/search" class="btn">Chercher un titre</a>
+  </div>
 
-<span>Trier par </span>
-@for (option of sortOptions; track option.value) {
-    <button (click)="sortBy.set(option.value)" [class.active]="sortBy() === option.value">{{ option.label }}</button>
-}
+  @if (loading()) {
+    <div class="state" role="status">
+      <p class="state-title">Chargement de ta liste…</p>
+    </div>
+  } @else if (error()) {
+    <div class="state state-error" role="alert">
+      <p class="state-title">{{ error() }}</p>
+      <button type="button" class="btn" (click)="onReload()">Réessayer</button>
+    </div>
+  } @else {
+    <div class="toolbar">
+      <div class="tabs" role="group" aria-label="Filtrer par statut">
+        @for (tab of tabs; track tab.value) {
+          <button type="button" [class.active]="activeTab() === tab.value" (click)="activeTab.set(tab.value)">
+            {{ tab.label }} <span class="count">{{ count(tab.value) }}</span>
+          </button>
+        }
+      </div>
+      <div class="sort" role="group" aria-label="Trier">
+        <span>Trier par</span>
+        @for (option of sortOptions; track option.value) {
+          <button type="button" [class.active]="sortBy() === option.value" (click)="sortBy.set(option.value)">
+            {{ option.label }}
+          </button>
+        }
+      </div>
+    </div>
 
-@for (item of sortedWatchlist(); track item.id) {
-<app-watch-card [item]="item" (statusChange)="onStatusChange(item.id, $event)" (remove)="onRemove(item.id)" (rate)="onRate(item.id, $event)" />
-}
-@empty {
-<p>{{ activeTab() === 'all' ? 'Ta watchlist est vide' : 'Aucun élément dans cette catégorie' }}</p>
-}
-}
-
-<a routerLink="/watchlist/new" class="btn">Add an item</a>
+    <div class="grid">
+      @for (item of sortedWatchlist(); track item.id) {
+        <app-watch-card
+          [item]="item"
+          (statusChange)="onStatusChange(item.id, $event)"
+          (remove)="onRemove(item.id)"
+          (rate)="onRate(item.id, $event)"
+        />
+      } @empty {
+        <div class="state empty">
+          <p class="state-title">
+            @if (activeTab() === 'all') {
+              Ta liste est vide
+            } @else {
+              Rien dans cette catégorie
+            }
+          </p>
+          <a routerLink="/watchlist/search" class="btn">Chercher un titre</a>
+        </div>
+      }
+    </div>
+  }
+</section>

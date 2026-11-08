@@ -14,3 +14,15 @@ export interface WatchlistItem {
     Plot?: string,
     rating?: number
 }
+export const STATUS_LABELS: Record<Status, string> = {
+  planned: 'À voir',
+  in_progress: 'En cours',
+  done: 'Terminé',
+};
+
+export const TYPE_LABELS: Record<MediaType, string> = {
+  movie: 'Film',
+  series: 'Série',
+  anime: 'Animé',
+  game: 'Jeu',
+};

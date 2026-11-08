@@ -1,7 +1,14 @@
-<nav>
-  <a routerLink="/">Liste</a>
-  <a routerLink="/watchlist/search">Recherche</a>
-  <a routerLink="/watchlist/new">Ajout d'un item</a>
-</nav>
-
-<router-outlet />
+<header class="topbar">
+  <a class="brand" routerLink="/" aria-label="Whatchlist, retour à la liste">
+    <span class="brand-mark" aria-hidden="true">?</span>
+    <span class="brand-name">Whatchlist</span>
+  </a>
+  <nav aria-label="Navigation principale">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Ma liste</a>
+    <a routerLink="/watchlist/search" routerLinkActive="active">Rechercher</a>
+    <a routerLink="/watchlist/new" routerLinkActive="active">Ajouter à la main</a>
+  </nav>
+</header>
+<main>
+  <router-outlet />
+</main>

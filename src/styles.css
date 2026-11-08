@@ -1,1 +1,113 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --ink: #1a1b2e;
+  --ink-soft: #5d5f78;
+  --paper: #f3f2f8;
+  --surface: #ffffff;
+  --line: #dcdae8;
+  --violet: #5b3df5;
+  --violet-dark: #4429d6;
+  --violet-tint: #ebe7ff;
+  --star: #f8ca00;
+  --danger: #c8283f;
+  --danger-tint: #fdeaed;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scrollbar-gutter: stable; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  line-height: 1.1;
+  margin: 0;
+}
+h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; letter-spacing: -0.02em; }
+h3 { font-size: 1.15rem; font-weight: 700; }
+p { margin: 0; }
+a { color: var(--violet-dark); }
+img { max-width: 100%; display: block; }
+
+:focus-visible { outline: 3px solid var(--violet); outline-offset: 2px; }
+
+/* Mise en page commune aux pages */
+.page { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+.page-title { margin-bottom: 1.5rem; }
+
+/* Boutons */
+.btn, button {
+  font: inherit;
+  cursor: pointer;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.1rem;
+  border: 2px solid var(--violet);
+  border-radius: 999px;
+  background: var(--violet);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+.btn:hover { background: var(--violet-dark); border-color: var(--violet-dark); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-ghost { background: transparent; color: var(--violet-dark); }
+.btn-ghost:hover { background: var(--violet-tint); border-color: var(--violet); }
+
+.link-danger {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--danger);
+  text-decoration: underline;
+}
+
+/* Formulaires */
+label { display: block; font-weight: 700; margin-bottom: 0.3rem; }
+input[type='text'], textarea, select {
+  width: 100%;
+  font: inherit;
+  padding: 0.65rem 0.8rem;
+  background: var(--surface);
+  color: var(--ink);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+input:disabled, textarea:disabled { background: var(--paper); color: var(--ink-soft); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--violet); }
+textarea { min-height: 7rem; resize: vertical; }
+.error { color: var(--danger); font-size: 0.9rem; margin-top: 0.3rem; }
+
+/* États vides / chargement */
+.state {
+  background: var(--surface);
+  border: 2px dashed var(--line);
+  border-radius: var(--radius);
+  padding: 2.5rem 1rem;
+  text-align: center;
+  color: var(--ink-soft);
+  display: grid;
+  gap: 1rem;
+  justify-items: center;
+}
+.state-title { font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; color: var(--ink); }
+.state-error { border-color: var(--danger); background: var(--danger-tint); color: var(--danger); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}

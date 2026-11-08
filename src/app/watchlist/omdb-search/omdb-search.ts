@@ -6,6 +6,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { WatchlistService } from '../../watch-item/watchlist.service';
 import { toWatchlistItem } from '../../omdb/omdb-mapper';
 import { SearchResult } from '../../omdb/omdb';
+import { TYPE_LABELS, MediaType } from '../../watch-item/watch-item';
 
 @Component({
   imports: [ReactiveFormsModule],
@@ -34,6 +35,12 @@ export class OmdbSearch {
       initialValue: [],
     },
   );
+
+  protected readonly importedIds = this.watchlistService.importedImdbIds;
+
+  protected typeLabel(type: string): string {
+    return TYPE_LABELS[type as MediaType] ?? type;
+  }
 
   addMovieToWatchlist(result: SearchResult): void {
     this.omdbService

@@ -1,65 +1,79 @@
 @let title = watchlistForm.controls.Title;
 @let year = watchlistForm.controls.Year;
+@let poster = watchlistForm.controls.Poster;
 
-@if (isEditMode()) {
-<h2>Edit Watchlist Item</h2>
-} @else {
-<h2>New Watchlist Item</h2>
-}
+<section class="page narrow">
+  <a class="back" routerLink="/">Retour à la liste</a>
 
-<form [formGroup]="watchlistForm" (ngSubmit)="onSubmit()">
-    <label for="title">Title</label>
-    <input id="title" type="text" formControlName="Title" autocomplete="off" />
-    @if (title.touched && title.errors?.['required']) {
-    <p class="error">Title is required.</p>
-    }
-    @if (title.touched && title.errors?.['minlength']) {
-    <p class="error">Title must be at least 2 characters long.</p>
-    }
+  <h2 class="page-title">
+    @if (isEditMode()) { Modifier le titre } @else { Ajouter un titre }
+  </h2>
 
-    <br>
+  <form [formGroup]="watchlistForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="field">
+      <label for="title">Titre</label>
+      <input id="title" type="text" formControlName="Title" autocomplete="off" />
+      @if (title.touched && title.errors?.['required']) {
+        <p class="error">Le titre est obligatoire.</p>
+      }
+      @if (title.touched && title.errors?.['minlength']) {
+        <p class="error">Le titre doit faire au moins 2 caractères.</p>
+      }
+    </div>
 
-    <label for="year">Year</label>
-    <input id="year" type="text" formControlName="Year" autocomplete="off" />
-    @if (year.touched && year.errors?.['pattern']) {
-    <p class="error">Year must be in YYYY format.</p>
-    }
+    <div class="field">
+      <label for="year">Année</label>
+      <input id="year" type="text" formControlName="Year" autocomplete="off" inputmode="numeric" placeholder="2010" />
+      @if (year.touched && year.errors?.['pattern']) {
+        <p class="error">L'année doit avoir 4 chiffres, par exemple 2010.</p>
+      }
+    </div>
 
-    <br>
+    <div class="field">
+      <label for="poster">Image de couverture (lien)</label>
+      <input id="poster" type="text" formControlName="Poster" autocomplete="off" inputmode="url"
+        placeholder="https://exemple.com/affiche.jpg" />
+      @if (poster.touched && poster.errors?.['pattern']) {
+        <p class="error">Le lien doit commencer par http:// ou https://.</p>
+      }
+      @if (posterUrl() && poster.valid) {
+        <div class="cover-preview">
+          <img [src]="posterUrl()" alt="Aperçu de la couverture" />
+        </div>
+      }
+    </div>
 
-    <label for="plot">Plot</label>
-    <textarea id="plot" formControlName="Plot" autocomplete="off"></textarea>
+    <div class="field">
+      <label for="plot">Résumé</label>
+      <textarea id="plot" formControlName="Plot"></textarea>
+    </div>
 
-    <br>
+    <div class="row">
+      <div class="field">
+        <label for="type">Type</label>
+        <select id="type" formControlName="type">
+          @for (option of types(); track option) {
+            <option [value]="option">{{ typeLabels[option] }}</option>
+          }
+        </select>
+      </div>
 
-    <label for="type">Type</label>
-    <select id="type" formControlName="type" autocomplete="off">
-        @for (option of types(); track option) {
-        <option [value]="option">{{ option }}</option>
-        }
-    </select>
+      <div class="field">
+        <label for="status">Statut</label>
+        <select id="status" formControlName="status">
+          @for (option of statuses(); track option) {
+            <option [value]="option">{{ statusLabels[option] }}</option>
+          }
+        </select>
+      </div>
+    </div>
 
-    <br>
-
-    <label for="status">Status</label>
-    <select id="status" formControlName="status" autocomplete="off">
-        @for (option of statuses(); track option) {
-        <option [value]="option">{{ option }}</option>
-        }
-    </select>
-
-    <br>
-
-    <button type="submit" [disabled]="watchlistForm.invalid || saving()">
-        @if (isEditMode()) {
-        Update
-        } @else {
-        Create
-        }
-    </button>
     @if (submitError()) {
-    <p class="error">{{ submitError() }}</p>
+      <p class="error" role="alert">{{ submitError() }}</p>
     }
-</form>
 
-<a routerLink="/watchlist">Retour à la liste</a>
+    <button type="submit" class="btn" [disabled]="saving()">
+      @if (isEditMode()) { Enregistrer } @else { Ajouter à ma liste }
+    </button>
+  </form>
+</section>

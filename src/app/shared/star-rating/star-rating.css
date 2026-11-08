@@ -1,5 +1,18 @@
+.stars { display: inline-flex; gap: 2px; }
+
+button {
+    background: none;
+    border: 0;
+    padding: 2px;
+    line-height: 0;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+
 .star {
-    width: 30px;
+    display: block;
+    width: 26px;
     aspect-ratio: 1;
     clip-path: polygon(50% 0,
             calc(50%*(1 + sin(.4turn))) calc(50%*(1 - cos(.4turn))),
@@ -13,5 +26,8 @@
 }
 
 .star.star-empty {
-    background: grey;
+    background: #d3d1e0;
+}
+.star.star-hover {
+    background: #f3dd73;
 }

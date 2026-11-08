@@ -28,7 +28,7 @@ export class WatchList {
   protected readonly sortBy = signal<'date' | 'rating'>('date');
 
   protected readonly sortOptions: { value: 'date' | 'rating'; label: string }[] = [
-    { value: 'date', label: 'Date' },
+    { value: 'date', label: 'Plus récents' },
     { value: 'rating', label: 'Note' },
   ];
 
@@ -48,6 +48,11 @@ export class WatchList {
 
     return list.sort((a,b) => b.addedAt.localeCompare(a.addedAt))
   });
+
+  protected count(tab: Status | 'all'): number {
+    const counts = this.watchlistService.countByStatus();
+    return tab === 'all' ? this.watchlist().length : counts[tab];
+  }
 
   onReload(): void {
     this.watchlistService.loadItems();

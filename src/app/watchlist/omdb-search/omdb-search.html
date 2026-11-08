@@ -1,16 +1,31 @@
-<input id="searchControl" type="text" [formControl]="searchControl" autocomplete="off"
-    placeholder="Harry Potter, Inception, Breaking Bad..." />
+<section class="page narrow">
+  <h2 class="page-title">Rechercher un titre</h2>
 
-@for (result of results(); track result.imdbID) {
-<div>
-    <h3>{{ result.Title }}</h3>
-    <p>{{ result.Year }}</p>
-    <p>{{ result.Type }}</p>
-    @if (result.Poster !== 'N/A') {
-    <img [src]="result.Poster" [alt]="result.Title" width="250" />
+  <label for="searchControl" class="visually-hidden">Titre à chercher</label>
+  <input id="searchControl" type="text" [formControl]="searchControl" autocomplete="off"
+    placeholder="Inception, Breaking Bad, Harry Potter…" />
+  <p class="hint">Tape au moins 3 lettres. Les titres viennent de la base OMDb.</p>
+
+  <ul class="results">
+    @for (result of results(); track result.imdbID) {
+      <li class="result">
+        <div class="thumb">
+          @if (result.Poster !== 'N/A') {
+            <img [src]="result.Poster" [alt]="''" loading="lazy" />
+          } @else {
+            <span aria-hidden="true">?</span>
+          }
+        </div>
+        <div class="text">
+          <h3>{{ result.Title }}</h3>
+          <p>{{ typeLabel(result.Type) }}, {{ result.Year }}</p>
+        </div>
+        @if (importedIds().has(result.imdbID)) {
+          <span class="added">Déjà dans ta liste</span>
+        } @else {
+          <button type="button" class="btn" (click)="addMovieToWatchlist(result)">Ajouter</button>
+        }
+      </li>
     }
-    <button (click)="addMovieToWatchlist(result)">Ajouter</button>
-</div>
-}
-@empty {
-}
+  </ul>
+</section>

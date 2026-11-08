@@ -1,13 +1,30 @@
-<h3>{{ item().Title }}</h3>
-<p>{{ item().Year }}</p>
-<p>{{ item().type }}</p>
-@if (item().Poster && item().Poster !== 'N/A') {
-<img [src]="item().Poster" [alt]="item().Title" width="250" />
-}
-<app-star-rating [rating]="item().rating ?? 0" (ratingChange)="rate.emit($event)" />
-@for (s of statuses; track s) {
-<button (click)="statusChange.emit(s)" [class.active]="item().status === s">{{ s }}</button>
-}
-<button (click)="remove.emit()">Supprimer</button>
-<a [routerLink]="['/watchlist', item().id]">Voir le détail</a>
-<a [routerLink]="['/watchlist', item().id, 'edit']">Modifier</a>
+<article class="card">
+  <a class="poster" [routerLink]="['/watchlist', item().id]" [attr.aria-label]="'Voir le détail de ' + item().Title">
+    @if (hasPoster()) {
+      <img [src]="item().Poster" [alt]="''" loading="lazy" />
+    } @else {
+      <span class="poster-empty" aria-hidden="true">?</span>
+    }
+  </a>
+
+  <div class="body">
+    <h3>{{ item().Title }}</h3>
+    <p class="meta">{{ typeLabel() }}{{ item().Year ? ', ' + item().Year : '' }}</p>
+    <app-star-rating [rating]="item().rating ?? 0" (ratingChange)="rate.emit($event)" />
+
+    <div class="status" role="group" aria-label="Statut">
+      @for (s of statuses; track s) {
+        <button type="button" (click)="statusChange.emit(s)" [class.active]="item().status === s">
+          {{ statusLabels[s] }}
+        </button>
+      }
+    </div>
+
+    <p class="added">Ajouté le {{ item().addedAt | date: 'd MMM y' }}</p>
+
+    <div class="actions">
+      <a [routerLink]="['/watchlist', item().id, 'edit']">Modifier</a>
+      <button type="button" class="link-danger" (click)="remove.emit()">Supprimer</button>
+    </div>
+  </div>
+</article>

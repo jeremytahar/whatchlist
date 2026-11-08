@@ -1,32 +1,51 @@
-<section class="page detail-page">
-    @if (loading()) {
-    <p>Loading…</p>
-    } @else if (item(); as item) {
-    <article class="detail-card">
-        <p>Movie details</p>
-        <h2>{{ item.Title }}</h2>
-        <p>{{ item.Year }}</p>
-
-        @if (item.Poster !== 'N/A') {
-        <img [src]="item.Poster" [alt]="item.Title" width="250" />
+<section class="page">
+  @if (loading()) {
+    <div class="state" role="status"><p class="state-title">Chargement…</p></div>
+  } @else if (item(); as item) {
+    <a class="back" routerLink="/">Retour à la liste</a>
+    <article class="detail">
+      <div class="poster">
+        @if (hasPoster()) {
+          <img [src]="item.Poster" [alt]="'Affiche de ' + item.Title" />
+        } @else {
+          <span class="poster-empty" aria-hidden="true">?</span>
         }
+      </div>
+
+      <div class="info">
+        <h2>{{ item.Title }}</h2>
+        <p class="meta">{{ typeLabels[item.type] }}{{ item.Year ? ', ' + item.Year : '' }}</p>
+
         <app-star-rating [rating]="item.rating ?? 0" (ratingChange)="onRate($event)" />
 
+        <dl>
+          <div>
+            <dt>Statut</dt>
+            <dd>{{ statusLabels[item.status] }}</dd>
+          </div>
+          @if (item.imdbRating) {
+            <div>
+              <dt>Note IMDb</dt>
+              <dd>{{ item.imdbRating }} / 10</dd>
+            </div>
+          }
+          <div>
+            <dt>Ajouté le</dt>
+            <dd>{{ item.addedAt | date: 'longDate' }}</dd>
+          </div>
+        </dl>
 
-        <p>{{ item.type }}</p>
-        <p>{{ item.Plot }}</p>
-        <p>{{ item.status }}</p>
-        @if (item.imdbRating) {
-        <p>{{ item.imdbRating }}</p>
+        @if (item.Plot) {
+          <p class="plot">{{ item.Plot }}</p>
         }
 
-        <a routerLink="/">Retour à la liste</a>
-        <a [routerLink]="['/watchlist', item.id, 'edit']">Modifier</a>
+        <a class="btn" [routerLink]="['/watchlist', item.id, 'edit']">Modifier</a>
+      </div>
     </article>
-    } @else {
-    <div class="empty-state">
-        <p class="empty-title">Movie not found</p>
-        <a class="btn" routerLink="/">Back to list</a>
+  } @else {
+    <div class="state">
+      <p class="state-title">Ce titre n'existe pas dans ta liste</p>
+      <a class="btn" routerLink="/">Retour à la liste</a>
     </div>
-    }
+  }
 </section>

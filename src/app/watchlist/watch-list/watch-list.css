@@ -1,3 +1,16 @@
-.active {
-    border: 1px solid green;
+.page-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
+.toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
+.tabs, .sort { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; }
+.sort span { color: var(--ink-soft); margin-right: 0.2rem; }
+.tabs button, .sort button {
+  padding: 0.4rem 0.9rem;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
 }
+.tabs button:hover, .sort button:hover { border-color: var(--violet); }
+.tabs button.active, .sort button.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+.count { opacity: 0.6; margin-left: 0.2rem; font-variant-numeric: tabular-nums; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.25rem; }
+.empty { grid-column: 1 / -1; }

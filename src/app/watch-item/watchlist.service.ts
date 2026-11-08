@@ -1,4 +1,4 @@
-import { Service, signal, inject } from '@angular/core';
+import { Service, signal, inject, computed } from '@angular/core';
 import { WatchlistItem, Status } from './watch-item';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
@@ -16,6 +16,18 @@ export class WatchlistService {
   readonly loading = this.loadingSignal.asReadonly();
   readonly error = this.errorSignal.asReadonly();
 
+  readonly countByStatus = computed(() => {
+    const counts: Record<Status, number> = { planned: 0, in_progress: 0, done: 0 };
+    for (const item of this.watchlistSignal()) {
+      counts[item.status]++;
+    }
+    return counts;
+  });
+  
+  readonly importedImdbIds = computed(
+    () => new Set(this.watchlistSignal().flatMap((item) => (item.imdbId ? [item.imdbId] : []))),
+  );
+
   constructor() {
     this.loadItems();
   }
@@ -30,7 +42,7 @@ export class WatchlistService {
         this.loadingSignal.set(false);
       },
       error: () => {
-        this.errorSignal.set('Could not load your watchlist. Is the API running?');
+        this.errorSignal.set("Impossible de charger ta liste. L'API tourne-t-elle ?");
         this.loadingSignal.set(false);
       },
     });

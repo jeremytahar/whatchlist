@@ -1,5 +1,16 @@
-@for (star of stars(); track star) {
-    <button type="button" (click)="rate(star)">
-        <div [class]="star <= rating() ? 'star-filled' : 'star-empty'" class="star"></div>
+<div class="stars" role="group" aria-label="Note" (mouseleave)="hovered.set(0)">
+  @for (star of stars(); track star) {
+    <button
+      type="button"
+      (click)="rate(star)"
+      (mouseenter)="hovered.set(star)"
+      (focus)="hovered.set(star)"
+      (blur)="hovered.set(0)"
+      [attr.aria-label]="'Noter ' + star + ' sur ' + max()"
+      [attr.aria-pressed]="star <= rating()"
+    >
+      <span class="star" [class.star-filled]="star <= rating()"
+        [class.star-empty]="star > rating()" [class.star-hover]="star <= hovered()"></span>
     </button>
-}
+  }
+</div>

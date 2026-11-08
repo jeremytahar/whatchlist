@@ -1,8 +1,9 @@
 import { Component, inject, signal, input, computed, effect } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { WatchlistService } from '../../watch-item/watchlist.service';
-import { WatchlistItem } from '../../watch-item/watch-item';
+import { STATUS_LABELS, TYPE_LABELS, WatchlistItem } from '../../watch-item/watch-item';
 import { Router, RouterLink } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   imports: [ReactiveFormsModule, RouterLink],
@@ -21,6 +22,9 @@ export class WatchForm {
   ]);
   private readonly router = inject(Router);
 
+  protected readonly statusLabels = STATUS_LABELS;
+  protected readonly typeLabels = TYPE_LABELS;
+
   protected readonly saving = signal(false);
   protected readonly submitError = signal<string | null>(null);
   protected readonly id = input<string>();
@@ -31,6 +35,11 @@ export class WatchForm {
     status: this.fb.nonNullable.control<WatchlistItem['status']>('planned', [Validators.required]),
     Year: ['', [Validators.pattern(/^\d{4}$/)]],
     Plot: [''],
+    Poster: ['', [Validators.pattern(/^https?:\/\/\S+$/)]],
+  });
+
+  protected readonly posterUrl = toSignal(this.watchlistForm.controls.Poster.valueChanges, {
+    initialValue: '',
   });
 
   protected readonly isEditMode = computed(() => this.id() !== undefined);
@@ -53,6 +62,7 @@ export class WatchForm {
       status: item.status,
       type: item.type,
       Plot: item.Plot ?? '',
+      Poster: item.Poster && item.Poster !== 'N/A' ? item.Poster : '',
     });
 
     const fromOMDB = item.imdbId;
@@ -61,10 +71,12 @@ export class WatchForm {
       this.watchlistForm.controls.Title.disable();
       this.watchlistForm.controls.Year.disable();
       this.watchlistForm.controls.Plot.disable();
+      this.watchlistForm.controls.Poster.disable();
     } else {
       this.watchlistForm.controls.Title.enable();
       this.watchlistForm.controls.Year.enable();
       this.watchlistForm.controls.Plot.enable();
+      this.watchlistForm.controls.Poster.enable();
     }
   });
 
@@ -79,7 +91,7 @@ export class WatchForm {
 
     const id = this.id();
 
-    const { Title, type, status, Year, Plot } = this.watchlistForm.getRawValue();
+    const { Title, type, status, Year, Plot, Poster } = this.watchlistForm.getRawValue();
 
     const request$ =
       id !== undefined
@@ -89,6 +101,7 @@ export class WatchForm {
             status,
             Year,
             Plot,
+            Poster,
           })
         : this.watchlistService.addItem({
             Title,
@@ -96,6 +109,7 @@ export class WatchForm {
             status,
             Year,
             Plot,
+            Poster,
             addedAt: new Date().toISOString(),
           });
 
@@ -103,7 +117,7 @@ export class WatchForm {
       next: () => this.router.navigate(id !== undefined ? ['/watchlist', id] : ['/']),
       error: () => {
         this.saving.set(false);
-        this.submitError.set('Could not save the item. Please try again.');
+        this.submitError.set("L'enregistrement a échoué. Vérifie que l'API tourne puis réessaie.");
       },
     });
   }

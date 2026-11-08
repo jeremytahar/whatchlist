@@ -6,12 +6,12 @@
       "Plot": "In Part 2 of the epic finale, the battle between the good and evil forces of the wizarding world escalate into an all-out war. The stakes have never been higher and no one is safe. But it is Harry Potter who may be called upon to make the ultimate sacrifice as he draws closer to the climactic showdown with Lord Voldemort. It all ends here.",
       "imdbRating": "8.1",
       "imdbId": "tt1201607",
-      "status": "planned",
+      "status": "in_progress",
       "addedAt": "2026-11-04T14:11:12.224Z",
       "type": "movie",
       "Poster": "https://m.media-amazon.com/images/M/MV5BOTA1Mzc2N2ItZWRiNS00MjQzLTlmZDQtMjU0NmY1YWRkMGQ4XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
       "id": "3gSHLLI",
-      "rating": 1
+      "rating": 4
     },
     {
       "Title": "Harry Potter and the Sorcerer's Stone",
@@ -24,7 +24,7 @@
       "type": "movie",
       "Poster": "https://m.media-amazon.com/images/M/MV5BNTU1MzgyMDMtMzBlZS00YzczLThmYWEtMjU3YmFlOWEyMjE1XkEyXkFqcGc@._V1_QL75_UY562_CR1,0,380,562_.jpg",
       "id": "6HKvpKj",
-      "rating": 5
+      "rating": 1
     },
     {
       "Title": "Hunger Games",
@@ -34,7 +34,21 @@
       "Plot": "Test",
       "addedAt": "2026-11-05T17:23:11.639Z",
       "id": "Zlz0Ilp",
-      "rating": 4
+      "rating": 5,
+      "Poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjeQXBd1eUSbC-H2v7EGvrSXY6jpJ17CJVXya63Js5TQ&s=10"
+    },
+    {
+      "Title": "Breaking Bad",
+      "Year": "2008–2013",
+      "Plot": "Walter White is a chemistry genius but works as a chemistry teacher at a high school in Albuquerque, New Mexico. His life drastically changes when he's diagnosed with stage III terminal lung cancer and given a prognosis of two years to live. To ensure that his pregnant wife and disabled teenage son have a financial future, he uses his chemistry background to create and sell the world's finest crystal methamphetamine. To sell his signature \"blue meth,\" he teams up with Jesse Pinkman, a former student of his. The meth makes them very rich very quickly, but it attracts the attention of his DEA brother-in-law, Hank. As Walter and Jesse's status in the drug world escalates, Walter becomes a dangerous criminal, and Jesse becomes a hot-headed salesman. Hank is always hot on his tail, forcing Walter to devise new ways to cover his tracks.",
+      "imdbRating": "9.5",
+      "imdbId": "tt0903747",
+      "status": "done",
+      "addedAt": "2026-11-06T15:28:33.234Z",
+      "type": "series",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BOWE4NTc3YmYtNmU2Mi00ZjhkLWE1MTItZmM1M2U1ODU3YjFlXkEyXkFqcGc@._V1_QL75_UY562_CR2,0,380,562_.jpg",
+      "id": "O9TgsOn",
+      "rating": 5
     }
   ]
 }
